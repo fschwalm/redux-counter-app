@@ -1,37 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 
-import CounterControl from '../../components/CounterControl/CounterControl';
-import CounterOutput from '../../components/CounterOutput/CounterOutput';
+import CounterControl from "../../components/CounterControl/CounterControl";
+import CounterOutput from "../../components/CounterOutput/CounterOutput";
 
-class Counter extends React.Component {
-
-    render () {
-        return (
-            <div>
-                <CounterOutput value={this.props.counter} />
-                <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
-                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter}  />
-                <CounterControl label="Add 5" clicked={this.props.onAddCounter}  />
-                <CounterControl label="Subtract 5" clicked={this.props.onSubtractCounter}  />
-            </div>
-        );
-    }
-}
+const Counter = props => (
+  <div>
+    <CounterOutput value={props.counter} />
+    <CounterControl label="Increment" clicked={props.onIncrementCounter} />
+    <CounterControl label="Decrement" clicked={props.onDecrementCounter} />
+    <CounterControl label="Add 5" clicked={props.onAddCounter} />
+    <CounterControl label="Subtract 5" clicked={props.onSubtractCounter} />
+  </div>
+);
 
 const mapStateToProps = state => {
-    return {
-        counter: state.counter
-    };
-}
+  return {
+    counter: state.counter
+  };
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
-        onDecrementCounter: () => dispatch({type: 'DECREMENT'}),
-        onAddCounter: () => dispatch({type: 'ADD', value: 5}),
-        onSubtractCounter: () => dispatch({type: 'SUBTRACT', value: 5}),
-    };
-}
+  return {
+    onIncrementCounter: () => dispatch({ type: "INCREMENT" }),
+    onDecrementCounter: () => dispatch({ type: "DECREMENT" }),
+    onAddCounter: () => dispatch({ type: "ADD", value: 5 }),
+    onSubtractCounter: () => dispatch({ type: "SUBTRACT", value: 5 })
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
