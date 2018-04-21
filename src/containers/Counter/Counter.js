@@ -3,7 +3,13 @@ import { connect } from "react-redux";
 
 import CounterControl from "../../components/CounterControl/CounterControl";
 import CounterOutput from "../../components/CounterOutput/CounterOutput";
-import { increment, decrement, add, subtract, storeResult } from '../../actions';
+import {
+  increment,
+  decrement,
+  add,
+  subtract,
+  storeResult
+} from "../../actions";
 
 const Counter = props => (
   <div>
@@ -17,12 +23,10 @@ const Counter = props => (
     <div>
       {props.storedResults.length === 0 ? (
         <h3>No results stored</h3>
-      ) : ( 
+      ) : (
         <ul>
           {props.storedResults.map(result => (
-            <li key={result.id}>
-            { result.value }
-            </li>
+            <li key={result.id}>{result.value}</li>
           ))}
         </ul>
       )}
