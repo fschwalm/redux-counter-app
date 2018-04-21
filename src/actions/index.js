@@ -5,6 +5,7 @@ const DECREMENT = "DECREMENT";
 const ADD = "ADD";
 const SUBTRACT = "SUBTRACT";
 const STORE_RESULT = "STORE_RESULT";
+const DELETE_RESULT_BY_ID = "DELETE_RESULT_BY_ID";
 
 const increment = () => ({
   type: INCREMENT
@@ -30,4 +31,9 @@ const storeResult = value => ({
   value
 });
 
-export { increment, decrement, add, subtract, storeResult };
+const deleteResultById = id => ({
+  type: DELETE_RESULT_BY_ID,
+  id
+});
+
+export { increment, decrement, add, subtract, storeResult, deleteResultById };

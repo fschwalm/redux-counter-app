@@ -1,4 +1,4 @@
-import { increment, decrement, add, subtract, storeResult } from '.';
+import { increment, decrement, add, subtract, storeResult, deleteResultById } from '.';
 
 jest.mock('uuid/v4', () => jest.fn(() => 1))
 
@@ -33,10 +33,16 @@ describe('Action', () => {
         expect(subtract(5)).toEqual(expectedAction);
     });
 
-    describe('action creator', () => {
-        beforeEach(() => {
-        });
+    it('shoud create an action to delete a store result by id', () => {
+        const id = 5;
+        const expectedAction = {
+            type: 'DELETE_RESULT_BY_ID',
+            id
+        };
+        expect(deleteResultById(id)).toEqual(expectedAction);
+    });
 
+    describe('action creator', () => {
         it('should create an action to store Result', () => {
             const value = 5;
             const expectedAction = {
@@ -44,7 +50,7 @@ describe('Action', () => {
                 id: 1,
                 value
             }
-            expect(storeResult(5)).toEqual(expectedAction);
+            expect(storeResult(value)).toEqual(expectedAction);
         });
     });
 });
