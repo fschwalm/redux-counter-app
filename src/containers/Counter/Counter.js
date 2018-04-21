@@ -4,41 +4,58 @@ import { connect } from "react-redux";
 import CounterControl from "../../components/CounterControl/CounterControl";
 import CounterOutput from "../../components/CounterOutput/CounterOutput";
 import {
-    increment,
-    decrement,
-    add,
-    subtract,
-    storeResult,
-    deleteResultById
-} from '../../actions';
+  increment,
+  decrement,
+  add,
+  subtract,
+  storeResult,
+  deleteResultById
+} from "../../actions";
 
-const Counter = props => (
-  <div>
-    <CounterOutput value={props.counter} />
-    <CounterControl label="Increment" clicked={props.onIncrementCounter} />
-    <CounterControl label="Decrement" clicked={props.onDecrementCounter} />
-    <CounterControl label="Add 5" clicked={props.onAddCounter} />
-    <CounterControl label="Subtract 5" clicked={props.onSubtractCounter} />
-    <hr />
-    <button onClick={props.onStoreResult}>Store Result</button>
+const Counter = props => {
+  const {
+    counter,
+    storedResults,
+    onIncrementCounter,
+    onDecrementCounter,
+    onAddCounter,
+    onSubtractCounter,
+    onStoreResult,
+    onDeleteStoredResultById
+  } = props;
+  return (
     <div>
-      {props.storedResults.length === 0 ? (
-        <h3>No results stored</h3>
-      ) : (
-        <ul>
-          {props.storedResults.map(result => (
-            <li onClick={() => props.onDeleteStoredResultById(result.id)} key={result.id}>{result.value}</li>
-          ))}
-        </ul>
-      )}
+      <CounterOutput value={counter} />
+      <CounterControl label="Increment" clicked={onIncrementCounter} />
+      <CounterControl label="Decrement" clicked={onDecrementCounter} />
+      <CounterControl label="Add 5" clicked={onAddCounter} />
+      <CounterControl label="Subtract 5" clicked={onSubtractCounter} />
+      <hr />
+      <button onClick={() => onStoreResult(counter)}>Store Result</button>
+      <div>
+        {storedResults.length === 0 ? (
+          <h3>No results stored</h3>
+        ) : (
+          <ul>
+            {storedResults.map(result => (
+              <li
+                onClick={() => onDeleteStoredResultById(result.id)}
+                key={result.id}
+              >
+                {result.value}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter,
-    storedResults: state.storedResults
+    counter: state.counterReducer.counter,
+    storedResults: state.resultReducer.storedResults
   };
 };
 
@@ -48,8 +65,8 @@ const mapDispatchToProps = dispatch => {
     onDecrementCounter: () => dispatch(decrement()),
     onAddCounter: () => dispatch(add(5)),
     onSubtractCounter: () => dispatch(subtract(5)),
-    onStoreResult: () => dispatch(storeResult()),
-    onDeleteStoredResultById: (id) => dispatch(deleteResultById(id))
+    onStoreResult: value => dispatch(storeResult(value)),
+    onDeleteStoredResultById: id => dispatch(deleteResultById(id))
   };
 };
 
