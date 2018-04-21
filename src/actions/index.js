@@ -1,38 +1,33 @@
 import uuidv4 from 'uuid/v4';
+import * as actionTypes from './types';
 
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
-const ADD = "ADD";
-const SUBTRACT = "SUBTRACT";
-const STORE_RESULT = "STORE_RESULT";
-const DELETE_RESULT_BY_ID = "DELETE_RESULT_BY_ID";
 
 const increment = () => ({
-  type: INCREMENT
+  type: actionTypes.INCREMENT
 });
 
 const decrement = () => ({
-  type: DECREMENT
+  type: actionTypes.DECREMENT
 });
 
 const add = value => ({
-  type: ADD,
+  type: actionTypes.ADD,
   value
 });
 
 const subtract = value => ({
-  type: SUBTRACT,
+  type: actionTypes.SUBTRACT,
   value
 });
 
 const storeResult = value => ({
-  type: STORE_RESULT,
+  type: actionTypes.STORE_RESULT,
   id: uuidv4(),
   value
 });
 
 const deleteResultById = id => ({
-  type: DELETE_RESULT_BY_ID,
+  type: actionTypes.DELETE_RESULT_BY_ID,
   id
 });
 
