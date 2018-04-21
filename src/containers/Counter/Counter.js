@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import CounterControl from "../../components/CounterControl/CounterControl";
 import CounterOutput from "../../components/CounterOutput/CounterOutput";
 import {
-  increment,
-  decrement,
-  add,
-  subtract,
-  storeResult
-} from "../../actions";
+    increment,
+    decrement,
+    add,
+    subtract,
+    storeResult,
+    deleteResultById
+} from '../../actions';
 
 const Counter = props => (
   <div>
@@ -26,7 +27,7 @@ const Counter = props => (
       ) : (
         <ul>
           {props.storedResults.map(result => (
-            <li key={result.id}>{result.value}</li>
+            <li onClick={() => props.onDeleteStoredResultById(result.id)} key={result.id}>{result.value}</li>
           ))}
         </ul>
       )}
@@ -47,7 +48,8 @@ const mapDispatchToProps = dispatch => {
     onDecrementCounter: () => dispatch(decrement()),
     onAddCounter: () => dispatch(add(5)),
     onSubtractCounter: () => dispatch(subtract(5)),
-    onStoreResult: () => dispatch(storeResult())
+    onStoreResult: () => dispatch(storeResult()),
+    onDeleteStoredResultById: (id) => dispatch(deleteResultById(id))
   };
 };
 
